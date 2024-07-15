@@ -2,15 +2,19 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-07-06T22:41:18 IST" name="Default suite" finished-at="2024-07-06T22:41:18 IST" duration-ms="100">
+  <suite started-at="2024-07-15T18:02:14 IST" name="Default suite" finished-at="2024-07-15T18:02:21 IST" duration-ms="6799">
     <groups>
     </groups>
-    <test started-at="2024-07-06T22:41:18 IST" name="Default test" finished-at="2024-07-06T22:41:18 IST" duration-ms="100">
+    <test started-at="2024-07-15T18:02:14 IST" name="Default test" finished-at="2024-07-15T18:02:21 IST" duration-ms="6799">
       <class name="freelancer.freelanceSeleniumProject.AppTest">
-        <test-method signature="shouldAnswerWithTrue()[pri:0, instance:freelancer.freelanceSeleniumProject.AppTest@65fb9ffc]" started-at="2024-07-06T22:41:18 IST" name="shouldAnswerWithTrue" finished-at="2024-07-06T22:41:18 IST" duration-ms="19" status="PASS">
+        <test-method is-config="true" signature="implWait()[pri:0, instance:freelancer.freelanceSeleniumProject.AppTest@327514f]" started-at="2024-07-15T18:02:14 IST" name="implWait" finished-at="2024-07-15T18:02:16 IST" duration-ms="2034" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- shouldAnswerWithTrue -->
+        </test-method> <!-- implWait -->
+        <test-method signature="ValidateLoginLogout()[pri:0, instance:freelancer.freelanceSeleniumProject.AppTest@327514f]" started-at="2024-07-15T18:02:16 IST" name="ValidateLoginLogout" finished-at="2024-07-15T18:02:21 IST" duration-ms="4706" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ValidateLoginLogout -->
       </class> <!-- freelancer.freelanceSeleniumProject.AppTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
