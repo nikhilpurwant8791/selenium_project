@@ -33,22 +33,10 @@ public class VerifyLogin
 	@Test
 	public void ValidateLogin() 
 	{
-		driver.navigate().to("https://www.demoblaze.com/");
+		cp.visitURL();
 		String URL = driver.getTitle();
 		sa.assertEquals(URL, "STORE" );
-		cp.clickDashboardLoginBtn();
-		boolean cross = cp.verifyLoginPopupCrossSign();
-		sa.assertEquals(cross, true, "Cursor: Pointer");
-		cp.enterUsername("automationQA9");
-		cp.enterPasswrod("automationQA9");
-		boolean close = cp.verifyPopupCloseBtn();
-		sa.assertEquals(close, true, "Cursor: default");
-		boolean loginPopup = cp.verifyPopupLoginBtn();
-		sa.assertEquals(loginPopup, true);
-		cp.clickPopupLoginBtn();
-		String username = cp.verifyUserNameAfterLogin();
-		sa.assertEquals(username, "Welcome automationQA9"); 
-        sa.assertAll(); 
+		cp.login("automationQA9", "automationQA9");
 	}
 	
 	@AfterMethod
@@ -56,6 +44,7 @@ public class VerifyLogin
 		cp.clickLogoutBtn();
 		String loginBtn= cp.verifyLoginBtnOnDashboard();
 		sa.assertEquals(loginBtn, "Log in");
+		sa.assertAll();
 	}
 	
 	@AfterTest
