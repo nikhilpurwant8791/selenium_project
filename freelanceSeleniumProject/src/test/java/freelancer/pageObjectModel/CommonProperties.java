@@ -9,29 +9,29 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 public class CommonProperties {
 	WebDriver driver;
+	WebDriverWait w;
 	private String url = "https://www.demoblaze.com/";
 
+	@FindBy (css ="#nava")
+	private WebElement headerText;
+	
+	@FindBy(xpath = "//a[contains(text(), 'Home ')]")
+	private WebElement home;
+	
+	@FindBy (xpath = "//a[contains(text(), 'Contact')]")
+	private WebElement contact;
+	
+	@FindBy (xpath="//a[contains(text(), 'About us')]")
+	private WebElement aboutUs;
+	
+	@FindBy (xpath = "//a[contains(text(), 'Cart')]")
+	private WebElement cart;
+	
 	@FindBy(id = "login2")
 	private WebElement dashboardLoginBtn;
-
-	@FindBy(xpath = "(//span[text()=\"×\"])[3]")
-	private WebElement loginPopupCrossSign;
-
-	@FindBy(id = "loginusername")
-	private WebElement loginPopupUsername;
-
-	@FindBy(css = "#loginpassword")
-	private WebElement loginPopupPassword;
-
-	@FindBy(xpath = "(//button[text()=\"Close\"])[3]")
-	private WebElement loginPopupCloseBtn;
-
-	@FindBy(xpath = "//button[@onclick='logIn()']")
-	private WebElement loginPopupLoginBtn;
 
 	@FindBy (id="nameofuser")
 	private WebElement dashboardUserNameBtnAfterLogin;
@@ -41,7 +41,7 @@ public class CommonProperties {
 
 	By usernameOnDashboard = By.id("nameofuser");
 	By logInBtnDashboard = By.id("login2");
-	WebDriverWait w;
+	
 
 
 	public CommonProperties(WebDriver driver) {
@@ -59,52 +59,10 @@ public class CommonProperties {
 		dashboardLoginBtn.click();
 	}
 
-	public boolean verifyLoginPopupCrossSign() {
-		boolean cross = loginPopupCrossSign.getCssValue("cursor").equalsIgnoreCase("pointer");
-		return cross;
-	}
-	
-	public void enterUsername(String username) {
-		loginPopupUsername.sendKeys(username);
-	}
-	
-	public void enterPasswrod(String pass) {
-		loginPopupPassword.sendKeys(pass);
-	}
-
-	public boolean verifyPopupCloseBtn() {
-		boolean close = loginPopupCloseBtn.getCssValue("cursor").equalsIgnoreCase("default");
-		return close;
-	}
-
-	public boolean verifyPopupLoginBtn() {
-		boolean loginBtn = loginPopupLoginBtn.getCssValue("cursor").equalsIgnoreCase("default");
-		return loginBtn;
-	}
-
-	public void clickPopupLoginBtn() {
-		loginPopupLoginBtn.click();
-	}
-
 	public String verifyUserNameAfterLogin() {
 		w.until(ExpectedConditions.visibilityOfElementLocated(usernameOnDashboard));
 		String username = dashboardUserNameBtnAfterLogin.getText();
 		return username;
-	}
-	
-	public void login (String username, String password) {
-		this.clickDashboardLoginBtn();
-		boolean cross = this.verifyLoginPopupCrossSign();
-		Assert.assertEquals(cross, true, "Cursor: Pointer");
-		this.enterUsername(username);
-		this.enterPasswrod(password);
-		boolean close = this.verifyPopupCloseBtn();
-		Assert.assertEquals(close, true, "Cursor: default");
-		boolean loginPopup = this.verifyPopupLoginBtn();
-		Assert.assertEquals(loginPopup, true);
-		this.clickPopupLoginBtn();
-		String uname = this.verifyUserNameAfterLogin();
-		Assert.assertEquals(uname, "Welcome "+username);
 	}
 
 	public void clickLogoutBtn() {
