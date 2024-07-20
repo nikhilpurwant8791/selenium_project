@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 
 public class CommonProperties {
@@ -43,6 +44,7 @@ public class CommonProperties {
 	By usernameOnDashboard = By.id("nameofuser");
 	By logInBtnDashboard = By.id("login2");
 	By contactButton = By.xpath("//a[contains(text(), 'Contact')]");
+	By aboutUsButton = By.xpath("//a[contains(text(), 'About us')]");
 	By logoutbtnWait = By.id("logout2");
 	
 
@@ -55,13 +57,19 @@ public class CommonProperties {
 	
 	public void visitURL() {
 		driver.navigate().to(url);
+		String URL = driver.getTitle();
+		Assert.assertEquals(URL, "STORE" );
 		driver.manage().window().maximize();
 	}
 	
-	public void clickContact() throws InterruptedException {
-//		w.until(ExpectedConditions.visibilityOfElementLocated(contactButton));
-		driver.navigate().refresh();
+	public void clickContact() {
+		w.until(ExpectedConditions.visibilityOfElementLocated(contactButton));
 		contact.click();
+	}
+	
+	public void clickAboutUs() {
+		w.until(ExpectedConditions.visibilityOfElementLocated(aboutUsButton));
+		aboutUs.click();
 	}
 
 	public void clickDashboardLoginBtn() {

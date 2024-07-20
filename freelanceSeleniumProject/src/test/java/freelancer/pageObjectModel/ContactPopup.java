@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ContactPopup extends CommonProperties {
+public class ContactPopup extends LoginPopup {
 	WebDriver driver;
 	String message = "This is for testing";
 

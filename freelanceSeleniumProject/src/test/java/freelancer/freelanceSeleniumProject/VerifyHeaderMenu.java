@@ -1,12 +1,13 @@
 package freelancer.freelanceSeleniumProject;
 
 import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
+import freelancer.pageObjectModel.AboutUsPopUp;
 import freelancer.pageObjectModel.ContactPopup;
 import freelancer.pageObjectModel.LoginPopup;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -17,6 +18,7 @@ public class VerifyHeaderMenu
 	LoginPopup lp;
 	ContactPopup cp;
 	SoftAssert sa; 
+	AboutUsPopUp ab;
 
 	@BeforeClass
 	public void implWait() {
@@ -26,6 +28,8 @@ public class VerifyHeaderMenu
 		lp=new LoginPopup(driver);
 		cp = new ContactPopup(driver);
 		sa = new SoftAssert();
+		ab = new AboutUsPopUp(driver);
+		lp.visitURL();
 	}
 	/**
 	 * User name: automationQA9
@@ -36,40 +40,49 @@ public class VerifyHeaderMenu
 	@Test
 	public void ValidateLogin() 
 	{
-		lp.visitURL();
-		String URL = driver.getTitle();
-		sa.assertEquals(URL, "STORE" );
 		lp.clickDashboardLoginBtn();
 		boolean cross = lp.verifyLoginPopupCrossSign();
-		Assert.assertEquals(cross, true, "Cursor: Pointer");
+		sa.assertEquals(cross, true, "Cursor: Pointer");
 		lp.enterUsername("automationQA9");
 		lp.enterPasswrod("automationQA9");
 		boolean close = lp.verifyPopupCloseBtn();
-		Assert.assertEquals(close, true, "Cursor: default");
+		sa.assertEquals(close, true, "Cursor: default");
 		boolean loginPopup = lp.verifyPopupLoginBtn();
-		Assert.assertEquals(loginPopup, true);
+		sa.assertEquals(loginPopup, true);
 		lp.clickPopupLoginBtn();
 		String uname = lp.verifyUserNameAfterLogin();
-		Assert.assertEquals(uname, "Welcome automationQA9");
+		sa.assertEquals(uname, "Welcome automationQA9");
 	}
 
 	@Test
 	public void validateContactPopup() throws InterruptedException {
-		lp.visitURL();
 		lp.login("automationQA9", "automationQA9");
 		lp.clickContact();
 		boolean headerText = cp.contactPopupHeaderText();
-		Assert.assertEquals(headerText, true);
+		sa.assertEquals(headerText, true);
 		boolean cross = cp.verifyContactPopupCrossSign();
-		Assert.assertEquals(cross, true);
+		sa.assertEquals(cross, true);
 		cp.enterEmail("abc@gmail.com");
 		cp.enterName("Tester");
 		cp.enterMessage();
 		boolean close = cp.verifyCloseBtn();
-		Assert.assertEquals(close, true);
+		sa.assertEquals(close, true);
 		boolean alertMsg = cp.clickSendMessageBtnAndCaptureAlertText();
-		Assert.assertEquals(alertMsg, true);
+		sa.assertEquals(alertMsg, true);
 		cp.acceptAlertPopup();
+	}
+	
+	@Test
+	public void verifyAboutUs() {
+		ab.login("automationQA9", "automationQA9");
+		ab.clickAboutUs();
+		boolean headertext = ab.headerText();
+		sa.assertEquals(headertext, true);
+		boolean cross = ab.verifyCrossSign();
+		sa.assertEquals(cross, true);
+		boolean closeBtn = ab.verifyCloseButton();
+		sa.assertEquals(closeBtn, true);
+		ab.clickCloseButton();
 	}
 
 	@AfterMethod
