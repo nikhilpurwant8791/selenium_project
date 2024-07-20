@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 public class CommonProperties {
 	WebDriver driver;
 	WebDriverWait w;
@@ -41,6 +42,8 @@ public class CommonProperties {
 
 	By usernameOnDashboard = By.id("nameofuser");
 	By logInBtnDashboard = By.id("login2");
+	By contactButton = By.xpath("//a[contains(text(), 'Contact')]");
+	By logoutbtnWait = By.id("logout2");
 	
 
 
@@ -54,6 +57,12 @@ public class CommonProperties {
 		driver.navigate().to(url);
 		driver.manage().window().maximize();
 	}
+	
+	public void clickContact() throws InterruptedException {
+//		w.until(ExpectedConditions.visibilityOfElementLocated(contactButton));
+		driver.navigate().refresh();
+		contact.click();
+	}
 
 	public void clickDashboardLoginBtn() {
 		dashboardLoginBtn.click();
@@ -66,6 +75,7 @@ public class CommonProperties {
 	}
 
 	public void clickLogoutBtn() {
+		w.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOfElementLocated(logoutbtnWait));
 		dashboardUserLogoutBtn.click();
 	}
 

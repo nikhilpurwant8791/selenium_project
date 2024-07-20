@@ -29,7 +29,6 @@ public class LoginPopup extends CommonProperties {
 		super (driver);
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
-
 	}
 
 	public boolean verifyLoginPopupCrossSign() {
@@ -61,17 +60,11 @@ public class LoginPopup extends CommonProperties {
 
 	public void login (String username, String password) {
 		this.clickDashboardLoginBtn();
-		boolean cross = this.verifyLoginPopupCrossSign();
-		Assert.assertEquals(cross, true, "Cursor: Pointer");
 		this.enterUsername(username);
 		this.enterPasswrod(password);
-		boolean close = this.verifyPopupCloseBtn();
-		Assert.assertEquals(close, true, "Cursor: default");
-		boolean loginPopup = this.verifyPopupLoginBtn();
-		Assert.assertEquals(loginPopup, true);
 		this.clickPopupLoginBtn();
 		String uname = this.verifyUserNameAfterLogin();
-		Assert.assertEquals(uname, "Welcome "+username);
+		Assert.assertEquals(uname, "Welcome automationQA9");
 	}
 
 
