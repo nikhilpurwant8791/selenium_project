@@ -33,11 +33,11 @@ public class VerifyListOfItems
 		sa = new SoftAssert();
 		dp = new DashboardPage(driver);
 		dp.visitURL();
+		dp.login("automationQA9", "automationQA9");
 	}
-	
+
 	@Test
 	public void VerifyTheList() {
-		dp.login("automationQA9", "automationQA9");
 		List<WebElement> eleList = dp.ListOfElement();
 		for(WebElement ele: eleList) {
 			dp.ScrollUptoElement(ele);
@@ -59,17 +59,79 @@ public class VerifyListOfItems
 		}
 	}
 
-	@AfterMethod
-	public void logout() {
-				dp.clickLogoutBtn();
-				String loginBtn= dp.verifyLoginBtnOnDashboard();
-				sa.assertEquals(loginBtn, "Log in");
-				sa.assertAll();
+	@Test
+	public void VerifyThePhonesList() throws InterruptedException {
+		driver.findElement(By.xpath("//a[text()='Phones']")).click();
+
+		/*use Thread.sleep(), whenever following exception occurred
+		java.lang.IllegalMonitorStateException: current thread not owner
+		 */
+
+		Thread.sleep(1000); 
+		List<WebElement> eleList = dp.ListOfElement();
+		int count = eleList.size();
+		sa.assertEquals(count, 7);
+		for(WebElement ele: eleList) {
+			dp.ScrollUptoElement(ele);
+			String text = ele.getText();
+			System.out.println("List of element = "+text);
+			if (text.equalsIgnoreCase("HTC One M9")) {
+				sa.assertEquals(text, "HTC One M9");
+			}
+		}
+	}
+
+	@Test
+	public void VerifyTheLaptopsList() throws InterruptedException {
+		driver.findElement(By.xpath("//a[text()='Laptops']")).click();
+
+		/*use Thread.sleep(), whenever following exception occurred
+		java.lang.IllegalMonitorStateException: current thread not owner
+		 */
+
+		Thread.sleep(1000); 
+		List<WebElement> eleList = dp.ListOfElement();
+		int count = eleList.size();
+		sa.assertEquals(count, 6);
+		for(WebElement ele: eleList) {
+			dp.ScrollUptoElement(ele);
+			String text = ele.getText();
+			System.out.println("List of element = "+text);
+			if (text.equalsIgnoreCase("MacBook Pro")) {
+				sa.assertEquals(text, "MacBook Pro");
+			}
+		}
+	}
+
+	@Test
+	public void VerifyTheMonitorsList() throws InterruptedException {
+		driver.findElement(By.xpath("//a[text()='Monitors']")).click();
+
+		/*use Thread.sleep(), whenever following exception occurred
+		java.lang.IllegalMonitorStateException: current thread not owner
+		 */
+
+		Thread.sleep(1000); 
+		List<WebElement> eleList = dp.ListOfElement();
+		int count = eleList.size();
+		sa.assertEquals(count, 2);
+		for(WebElement ele: eleList) {
+			dp.ScrollUptoElement(ele);
+			String text = ele.getText();
+			System.out.println("List of element = "+text);
+			if (text.equalsIgnoreCase("ASUS Full HD")) {
+				sa.assertEquals(text, "ASUS Full HD");
+			}
+		}
 	}
 
 	@AfterClass
 	public void closeBrowser() {
-				driver.quit();
+		dp.clickLogoutBtn();
+		String loginBtn= dp.verifyLoginBtnOnDashboard();
+		sa.assertEquals(loginBtn, "Log in");
+		sa.assertAll();
+		driver.quit();
 	}
 
 }
