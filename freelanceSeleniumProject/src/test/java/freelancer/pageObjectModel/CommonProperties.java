@@ -2,6 +2,7 @@ package freelancer.pageObjectModel;
 
 import java.time.Duration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -91,5 +92,10 @@ public class CommonProperties {
 		w.ignoring(StaleElementReferenceException.class).until(ExpectedConditions.visibilityOfElementLocated(logInBtnDashboard));
 		String login = dashboardLoginBtn.getText();
 		return login;
+	}
+	
+	public void ScrollUptoElement(WebElement ele) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView();", ele);
 	}
 }
